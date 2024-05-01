@@ -26,8 +26,10 @@ export const usePersonStore = defineStore({
     },
   },
   getters: {
-    getOrderByOrder: (state) => (order) => {
-      return state.persons.filter((person) => person.age > order);
+    getOrderByOrder: (state) => () => {
+      return state.persons.filter(
+        (personne) => personne.dob.age < age && personne
+      );
     },
   },
 });

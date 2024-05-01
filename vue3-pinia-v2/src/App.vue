@@ -31,11 +31,10 @@
 
 <script setup>
 import { usePersonStore } from "@/stores/personStore.js";
-import { onBeforeMount, onMounted, ref } from "vue";
+import { onBeforeMount, computed } from "vue";
 
-const personStore = usePersonStore();
-let persons = ref([]);
-persons = personStore.persons;
+let personStore = usePersonStore();
+//const persons = personStore.persons;
 const loading = personStore.loading;
 const error = personStore.error;
 
@@ -44,10 +43,10 @@ onBeforeMount(() => {
   personStore.fetchPersons();
 });
 
-onMounted(() => {
-  console.log("********889***", persons.value);
-});
-
 // Utilisation de la méthode getOrderByOrder pour obtenir la liste des personnes avec order: 4
-const personsOrder4 = personStore.getOrderByOrder(4);
+const personsOrder4 = personStore.getOrderByOrder();
+
+const persons = computed(() => {
+  return personStore.persons;
+});
 </script>
